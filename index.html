@@ -28,6 +28,43 @@
             --transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
+        /* Announcement Bar */
+        .announcement-bar {
+            background: linear-gradient(90deg, #1A1A1A 0%, #2D2D2D 50%, #1A1A1A 100%);
+            color: white;
+            font-size: 0.8125rem;
+            padding: 10px 0;
+            overflow: hidden;
+        }
+
+        .announcement-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            animation: marquee 20s linear infinite;
+        }
+
+        .announcement-link {
+            background: var(--accent);
+            color: white;
+            padding: 4px 16px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: var(--transition);
+        }
+
+        .announcement-link:hover {
+            background: var(--accent-light);
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
         html {
             scroll-behavior: smooth;
         }
@@ -561,58 +598,110 @@
             margin-left: 8px;
         }
 
-        /* Features Section */
+        /* Features Section - Enhanced with Trust Badges */
         .features {
-            padding: 120px 0;
+            padding: 80px 0;
+            background: linear-gradient(180deg, var(--bg) 0%, #F5F4F2 100%);
+        }
+
+        .features .section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .features .section-tag {
+            color: var(--accent);
+            font-size: 0.8125rem;
+        }
+
+        .features .section-title {
+            font-size: 2rem;
         }
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 48px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .feature-card {
-            text-align: center;
-            padding: 48px 32px;
             background: var(--bg-card);
+            padding: 32px 24px;
+            text-align: center;
             border: 1px solid var(--border);
+            border-radius: var(--radius);
             transition: var(--transition);
         }
 
         .feature-card:hover {
             border-color: var(--accent);
             transform: translateY(-4px);
-            box-shadow: 0 20px 60px var(--shadow);
+            box-shadow: 0 16px 48px var(--shadow-hover);
         }
 
         .feature-icon {
             width: 64px;
             height: 64px;
-            margin: 0 auto 24px;
+            margin: 0 auto 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #F5F4F2;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
             border-radius: 50%;
         }
 
         .feature-icon svg {
             width: 28px;
             height: 28px;
-            stroke: var(--accent);
+            stroke: white;
         }
 
         .feature-title {
             font-family: 'Outfit', sans-serif;
-            font-size: 1.25rem;
-            margin-bottom: 12px;
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 8px;
         }
 
         .feature-desc {
-            font-size: 0.9375rem;
+            font-size: 0.875rem;
             color: var(--text-secondary);
-            line-height: 1.7;
+            line-height: 1.6;
+        }
+
+        /* Social Proof - Trust Numbers */
+        .social-proof {
+            padding: 60px 0;
+            background: linear-gradient(135deg, #1A1A1A 0%, #2D2D2D 100%);
+            color: white;
+        }
+
+        .social-proof-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            text-align: center;
+        }
+
+        .trust-item {
+            padding: 24px;
+        }
+
+        .trust-number {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .trust-label {
+            font-size: 0.8125rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
         }
 
         /* Newsletter Section */
@@ -1171,6 +1260,14 @@
     </style>
 </head>
 <body>
+    <!-- Announcement Bar -->
+    <div class="announcement-bar">
+        <div class="container announcement-content">
+            <span>🚀 Free Express Shipping on Orders Over $150 | Limited Time: 20% OFF with code HAUS20</span>
+            <a href="#featured" class="announcement-link">Shop Now</a>
+        </div>
+    </div>
+
     <!-- Navigation -->
     <nav class="nav" id="nav">
         <div class="container nav-inner">
@@ -1283,6 +1380,30 @@
                             <p class="category-count">52 Products</p>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof / Trust Banner -->
+    <section class="social-proof">
+        <div class="container">
+            <div class="social-proof-grid">
+                <div class="trust-item">
+                    <div class="trust-number">50,000+</div>
+                    <div class="trust-label">Happy Customers</div>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-number">4.9/5</div>
+                    <div class="trust-label">Average Rating</div>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-number">98%</div>
+                    <div class="trust-label">Order Fulfillment</div>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-number">24h</div>
+                    <div class="trust-label">Avg Response Time</div>
                 </div>
             </div>
         </div>

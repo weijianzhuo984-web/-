@@ -1,0 +1,1950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product — HAUS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #FAFAF8;
+            --bg-card: #FFFFFF;
+            --text-primary: #1A1A1A;
+            --text-secondary: #6B6B6B;
+            --accent: #8B7355;
+            --accent-light: #A69076;
+            --border: #E8E6E3;
+            --shadow: rgba(26, 26, 26, 0.06);
+            --shadow-hover: rgba(26, 26, 26, 0.12);
+            --radius: 2px;
+            --transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 clamp(24px, 5vw, 80px);
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(250, 250, 248, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 72px;
+        }
+
+        .logo {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 48px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .cart-btn {
+            position: relative;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .cart-btn svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--text-primary);
+            transition: var(--transition);
+        }
+
+        .cart-btn:hover svg {
+            stroke: var(--accent);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--accent);
+            color: white;
+            font-size: 0.625rem;
+            font-weight: 600;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: var(--transition);
+        }
+
+        .cart-count.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .back-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-top: 100px;
+            margin-bottom: 40px;
+            transition: color var(--transition);
+        }
+
+        .back-link:hover {
+            color: var(--accent);
+        }
+
+        .back-link svg {
+            width: 16px;
+            height: 16px;
+            transition: transform var(--transition);
+        }
+
+        .back-link:hover svg {
+            transform: translateX(-4px);
+        }
+
+        /* Product Section */
+        .product-section {
+            padding-bottom: 120px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        /* Gallery */
+        .product-gallery {
+            position: sticky;
+            top: 100px;
+        }
+
+        .main-image {
+            width: 100%;
+            aspect-ratio: 1;
+            background: #F5F4F2;
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+
+        .main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s var(--transition);
+        }
+
+        .main-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .thumbnails {
+            display: flex;
+            gap: 12px;
+        }
+
+        .thumbnail {
+            width: 80px;
+            height: 80px;
+            background: #F5F4F2;
+            cursor: pointer;
+            overflow: hidden;
+            border: 2px solid transparent;
+            transition: var(--transition);
+        }
+
+        .thumbnail.active {
+            border-color: var(--accent);
+        }
+
+        .thumbnail:hover {
+            border-color: var(--accent-light);
+        }
+
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Product Info */
+        .product-info {
+            padding-top: 20px;
+        }
+
+        .product-category {
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        .product-title {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        .product-price-row {
+            display: flex;
+            align-items: baseline;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .product-price {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.75rem;
+        }
+
+        .product-price .original {
+            text-decoration: line-through;
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+        }
+
+        .product-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            font-size: 0.625rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 6px 12px;
+        }
+
+        .product-description {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        /* Options */
+        .product-options {
+            margin-bottom: 40px;
+        }
+
+        .option-label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .option-label span {
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .option-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .option-btn {
+            padding: 12px 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            font-family: inherit;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .option-btn:hover {
+            border-color: var(--accent);
+        }
+
+        .option-btn.active {
+            background: var(--text-primary);
+            color: white;
+            border-color: var(--text-primary);
+        }
+
+        .color-options {
+            display: flex;
+            gap: 12px;
+        }
+
+        .color-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .color-btn::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border: 2px solid transparent;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .color-btn.active::after {
+            border-color: var(--accent);
+        }
+
+        .color-btn:hover::after {
+            border-color: var(--border);
+        }
+
+        /* Quantity */
+        .quantity-row {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--border);
+        }
+
+        .qty-btn {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: none;
+            border: none;
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .qty-btn:hover {
+            background: var(--bg);
+        }
+
+        .qty-value {
+            width: 48px;
+            text-align: center;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+        }
+
+        .stock-info {
+            font-size: 0.8125rem;
+            color: var(--text-secondary);
+        }
+
+        .stock-info.in-stock {
+            color: #2d5a3d;
+        }
+
+        /* Add to Cart */
+        .add-to-cart-row {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+
+        .add-to-cart-btn {
+            flex: 1;
+            padding: 20px 40px;
+            background: var(--text-primary);
+            color: white;
+            border: none;
+            font-family: inherit;
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .add-to-cart-btn:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .add-to-cart-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .wishlist-btn {
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .wishlist-btn:hover {
+            border-color: var(--accent);
+            background: #FDF9F6;
+        }
+
+        .wishlist-btn.active {
+            background: #FDF9F6;
+            border-color: #e74c3c;
+        }
+
+        .wishlist-btn.active svg {
+            fill: #e74c3c;
+            stroke: #e74c3c;
+        }
+
+        .wishlist-btn svg {
+            width: 22px;
+            height: 22px;
+            stroke: var(--text-primary);
+            transition: var(--transition);
+        }
+
+        /* Features Grid */
+        .product-features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 48px;
+        }
+
+        .feature-item {
+            text-align: center;
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #F5F4F2;
+            border-radius: 50%;
+        }
+
+        .feature-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: var(--accent);
+        }
+
+        .feature-title {
+            font-size: 0.8125rem;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .feature-desc {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        /* Accordion */
+        .product-accordions {
+            border-top: 1px solid var(--border);
+        }
+
+        .accordion {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .accordion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 0;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .accordion-header:hover {
+            color: var(--accent);
+        }
+
+        .accordion-title {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .accordion-icon {
+            width: 24px;
+            height: 24px;
+            transition: transform var(--transition);
+        }
+
+        .accordion.open .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s var(--transition);
+        }
+
+        .accordion.open .accordion-content {
+            max-height: 500px;
+        }
+
+        .accordion-body {
+            padding-bottom: 24px;
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .accordion-body ul {
+            list-style: none;
+            margin-top: 12px;
+        }
+
+        .accordion-body li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+        }
+
+        .accordion-body li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        /* Related Products */
+        .related-section {
+            padding: 120px 0;
+            background: var(--bg-card);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 48px;
+        }
+
+        .section-tag {
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+        }
+
+        .related-card {
+            cursor: pointer;
+        }
+
+        .related-image {
+            aspect-ratio: 1;
+            background: #F5F4F2;
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+
+        .related-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s var(--transition);
+        }
+
+        .related-card:hover .related-image img {
+            transform: scale(1.05);
+        }
+
+        .related-name {
+            font-size: 0.9375rem;
+            font-weight: 500;
+            margin-bottom: 4px;
+            transition: color var(--transition);
+        }
+
+        .related-card:hover .related-name {
+            color: var(--accent);
+        }
+
+        .related-price {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 80px 0 40px;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 64px;
+            margin-bottom: 64px;
+        }
+
+        .footer-brand {
+            max-width: 280px;
+        }
+
+        .footer-logo {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            margin-bottom: 20px;
+        }
+
+        .footer-desc {
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .footer-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-links a {
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            transition: color var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 40px;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-copy {
+            font-size: 0.8125rem;
+            color: var(--text-secondary);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 16px;
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+
+        .footer-social a:hover {
+            border-color: var(--accent);
+            background: var(--accent);
+        }
+
+        .footer-social a:hover svg {
+            stroke: white;
+        }
+
+        .footer-social svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--text-secondary);
+            transition: var(--transition);
+        }
+
+        /* Cart Sidebar */
+        .cart-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(26, 26, 26, 0.5);
+            z-index: 200;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .cart-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            max-width: 420px;
+            height: 100%;
+            background: var(--bg-card);
+            z-index: 201;
+            transform: translateX(100%);
+            transition: transform 0.5s var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-sidebar.open {
+            transform: translateX(0);
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .cart-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.25rem;
+        }
+
+        .cart-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .cart-close svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--text-primary);
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px;
+        }
+
+        .cart-empty {
+            text-align: center;
+            padding: 60px 24px;
+            color: var(--text-secondary);
+        }
+
+        .cart-empty-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 24px;
+            opacity: 0.3;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 16px;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            background: #F5F4F2;
+            flex-shrink: 0;
+        }
+
+        .cart-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-size: 0.9375rem;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .cart-item-price {
+            font-size: 0.875rem;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .cart-item-qty {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .qty-btn-small {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #F5F4F2;
+            border: none;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: var(--transition);
+        }
+
+        .qty-btn-small:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        .cart-item-remove {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 0.75rem;
+            text-decoration: underline;
+            transition: color var(--transition);
+        }
+
+        .cart-item-remove:hover {
+            color: #e74c3c;
+        }
+
+        .cart-footer {
+            padding: 24px;
+            border-top: 1px solid var(--border);
+            background: var(--bg);
+        }
+
+        .cart-subtotal {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .cart-subtotal-label {
+            color: var(--text-secondary);
+        }
+
+        .cart-subtotal-value {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.25rem;
+        }
+
+        .cart-shipping {
+            font-size: 0.8125rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .cart-checkout {
+            width: 100%;
+            padding: 18px;
+            background: var(--text-primary);
+            color: white;
+            border: none;
+            font-family: inherit;
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .cart-checkout:hover {
+            background: var(--accent);
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--text-primary);
+            color: white;
+            padding: 16px 32px;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 300;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .toast svg {
+            width: 20px;
+            height: 20px;
+            stroke: #2ecc71;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+
+            .product-gallery {
+                position: relative;
+                top: 0;
+            }
+
+            .related-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .product-features {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 48px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .related-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+
+            .add-to-cart-row {
+                flex-direction: column;
+            }
+
+            .wishlist-btn {
+                width: 100%;
+                height: 48px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 24px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .related-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .thumbnails {
+                overflow-x: auto;
+                padding-bottom: 8px;
+            }
+
+            .thumbnail {
+                flex-shrink: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container nav-inner">
+            <a href="index.html" class="logo">HAUS</a>
+            <ul class="nav-links">
+                <li><a href="index.html#categories">Collections</a></li>
+                <li><a href="index.html#featured">Shop</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="cart-btn" id="cartBtn">
+                    <svg fill="none" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                    </svg>
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        <a href="index.html" class="back-link">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+            </svg>
+            Back to Shop
+        </a>
+
+        <section class="product-section">
+            <div class="product-grid">
+                <!-- Gallery -->
+                <div class="product-gallery">
+                    <div class="main-image">
+                        <img id="mainImage" src="" alt="Product Image">
+                    </div>
+                    <div class="thumbnails" id="thumbnails">
+                        <!-- Thumbnails will be inserted by JS -->
+                    </div>
+                </div>
+
+                <!-- Product Info -->
+                <div class="product-info">
+                    <p class="product-category" id="productCategory">Category</p>
+                    <h1 class="product-title" id="productTitle">Product Name</h1>
+                    
+                    <div class="product-price-row">
+                        <p class="product-price" id="productPrice">$0</p>
+                        <span class="product-badge" id="productBadge" style="display: none;">Sale</span>
+                    </div>
+
+                    <p class="product-description" id="productDescription">
+                        Product description goes here...
+                    </p>
+
+                    <!-- Color Options -->
+                    <div class="product-options" id="colorOptions" style="display: none;">
+                        <div class="option-label">
+                            Color <span id="selectedColor">Natural Oak</span>
+                        </div>
+                        <div class="color-options" id="colorBtns">
+                            <!-- Color buttons inserted by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Size Options -->
+                    <div class="product-options" id="sizeOptions" style="display: none;">
+                        <div class="option-label">
+                            Size <span id="selectedSize">Large</span>
+                        </div>
+                        <div class="option-row" id="sizeBtns">
+                            <!-- Size buttons inserted by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Quantity -->
+                    <div class="quantity-row">
+                        <div class="quantity-selector">
+                            <button class="qty-btn" id="qtyMinus">−</button>
+                            <span class="qty-value" id="qtyValue">1</span>
+                            <button class="qty-btn" id="qtyPlus">+</button>
+                        </div>
+                        <p class="stock-info in-stock" id="stockInfo">In Stock — Ships in 2-3 days</p>
+                    </div>
+
+                    <!-- Add to Cart -->
+                    <div class="add-to-cart-row">
+                        <button class="add-to-cart-btn" id="addToCartBtn">
+                            <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                            </svg>
+                            Add to Cart
+                        </button>
+                        <button class="wishlist-btn" id="wishlistBtn" title="Add to Wishlist">
+                            <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Features -->
+                    <div class="product-features">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <svg fill="none" stroke-width="1.5" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
+                                </svg>
+                            </div>
+                            <p class="feature-title">Free Shipping</p>
+                            <p class="feature-desc">Orders over $150</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <svg fill="none" stroke-width="1.5" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+                                </svg>
+                            </div>
+                            <p class="feature-title">2-Year Warranty</p>
+                            <p class="feature-desc">Quality guaranteed</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <svg fill="none" stroke-width="1.5" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+                                </svg>
+                            </div>
+                            <p class="feature-title">Easy Returns</p>
+                            <p class="feature-desc">30-day policy</p>
+                        </div>
+                    </div>
+
+                    <!-- Accordions -->
+                    <div class="product-accordions">
+                        <div class="accordion open">
+                            <div class="accordion-header">
+                                <span class="accordion-title">Details & Materials</span>
+                                <svg class="accordion-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="accordion-body" id="detailsAccordion">
+                                    <ul>
+                                        <li>Premium solid wood construction</li>
+                                        <li>Hand-finished with natural oils</li>
+                                        <li>Sustainable sourcing certified</li>
+                                        <li>Dimensions: 60cm × 40cm × 45cm</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion">
+                            <div class="accordion-header">
+                                <span class="accordion-title">Shipping & Delivery</span>
+                                <svg class="accordion-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="accordion-body">
+                                    <p>Free standard shipping on orders over $150. Express shipping available at checkout.</p>
+                                    <ul>
+                                        <li>Standard: 5-7 business days</li>
+                                        <li>Express: 2-3 business days</li>
+                                        <li>International: 10-14 business days</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion">
+                            <div class="accordion-header">
+                                <span class="accordion-title">Care Instructions</span>
+                                <svg class="accordion-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="accordion-body">
+                                    <ul>
+                                        <li>Wipe clean with a damp cloth</li>
+                                        <li>Avoid direct sunlight to prevent fading</li>
+                                        <li>Use coasters and trivets for hot items</li>
+                                        <li>Re-oil annually for longevity</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Related Products -->
+    <section class="related-section">
+        <div class="container">
+            <div class="section-header">
+                <div>
+                    <p class="section-tag">You May Also Like</p>
+                    <h2 class="section-title">Related Products</h2>
+                </div>
+            </div>
+            <div class="related-grid" id="relatedGrid">
+                <!-- Related products inserted by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">HAUS</div>
+                    <p class="footer-desc">Curated essentials for mindful living. We believe in the power of thoughtful design to transform everyday moments.</p>
+                </div>
+                <div>
+                    <h4 class="footer-title">Shop</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">All Products</a></li>
+                        <li><a href="index.html">New Arrivals</a></li>
+                        <li><a href="index.html">Best Sellers</a></li>
+                        <li><a href="index.html">Sale</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Our Story</a></li>
+                        <li><a href="index.html">Sustainability</a></li>
+                        <li><a href="index.html">Careers</a></li>
+                        <li><a href="index.html">Press</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">FAQ</a></li>
+                        <li><a href="index.html">Shipping</a></li>
+                        <li><a href="index.html">Returns</a></li>
+                        <li><a href="index.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-copy">© 2026 HAUS. All rights reserved.</p>
+                <div class="footer-social">
+                    <a href="#" aria-label="Instagram">
+                        <svg fill="none" stroke-width="1.5" viewBox="0 0 24 24">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="Pinterest">
+                        <svg fill="none" stroke-width="1.5" viewBox="0 0 24 24">
+                            <path d="M8 12a4 4 0 118 0c0 2.22-1.5 4-3.5 4-1 0-1.5-.5-1.5-.5s-1.5 2-2 3c-.5 1-1 2-1 3 0 1.5 1 3 3 3 2 0 3-1.5 3-3 0-.5 0-1-.5-1.5l-.5-2c0-.5.5-1 1-1s1 .5 1.5.5c1 0 2-1 2-2.5 0-1.5-1.5-2.5-3-2.5-2.5 0-4.5 2-4.5 4.5 0 1 .5 2 1.5 2.5-.5 2-1.5 5-2 5-.5 0-1-.5-1-1.5 0-1.5.5-3 .5-4l.5-2"></path>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="Twitter">
+                        <svg fill="none" stroke-width="1.5" viewBox="0 0 24 24">
+                            <path d="M4 4l11.733 16h4.267l-11.733 -16z"></path>
+                            <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Overlay -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3 class="cart-title">Your Cart</h3>
+            <button class="cart-close" id="cartClose">
+                <svg fill="none" stroke-width="1.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="cart-empty" id="cartEmpty">
+                <svg class="cart-empty-icon" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                </svg>
+                <p>Your cart is empty</p>
+            </div>
+        </div>
+        <div class="cart-footer" id="cartFooter" style="display: none;">
+            <div class="cart-subtotal">
+                <span class="cart-subtotal-label">Subtotal</span>
+                <span class="cart-subtotal-value" id="cartSubtotal">$0</span>
+            </div>
+            <p class="cart-shipping">Shipping calculated at checkout</p>
+            <button class="cart-checkout">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+        </svg>
+        <span id="toastMessage">Added to cart!</span>
+    </div>
+
+    <script>
+        // Product Data
+        const products = [
+            {
+                id: 1,
+                name: 'Ceramic Planter Set',
+                category: 'Decor',
+                price: 89,
+                originalPrice: null,
+                tag: null,
+                description: 'A set of three handcrafted ceramic planters in varying sizes, perfect for displaying succulents, small herbs, or trailing plants. Each piece features a reactive glaze finish that creates unique variations in color and texture.',
+                images: [
+                    'https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=800&q=80',
+                    'https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?w=400&q=80',
+                    'https://images.unsplash.com/photo-1509423350716-97f9360b4e09?w=400&q=80'
+                ],
+                colors: [
+                    { name: 'Natural', hex: '#E8DFD0' },
+                    { name: 'Sage', hex: '#9CAF88' },
+                    { name: 'Terracotta', hex: '#C67B5C' }
+                ],
+                sizes: null,
+                details: [
+                    'Set of 3 ceramic planters',
+                    'Reactive glaze finish — each piece unique',
+                    'Drainage holes included',
+                    'Sizes: Small (8cm), Medium (12cm), Large (16cm)'
+                ]
+            },
+            {
+                id: 2,
+                name: 'Linen Throw Blanket',
+                category: 'Textiles',
+                price: 128,
+                originalPrice: 160,
+                tag: 'Sale',
+                description: 'Luxuriously soft stonewashed linen throw, perfect for adding texture and warmth to any space. Pre-washed for exceptional softness, this blanket becomes more beautiful with each use.',
+                images: [
+                    'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80',
+                    'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=400&q=80',
+                    'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=400&q=80'
+                ],
+                colors: [
+                    { name: 'Oatmeal', hex: '#F5F0E8' },
+                    { name: 'Charcoal', hex: '#4A4A4A' },
+                    { name: 'Blush', hex: '#E8C4C4' }
+                ],
+                sizes: null,
+                details: [
+                    '100% European flax linen',
+                    'Stonewashed for softness',
+                    'Dimensions: 130cm × 170cm',
+                    'Machine washable'
+                ]
+            },
+            {
+                id: 3,
+                name: 'Oak Side Table',
+                category: 'Furniture',
+                price: 295,
+                originalPrice: null,
+                tag: 'New',
+                description: 'Minimalist side table crafted from solid oak with a beautiful natural grain. The perfect companion for your sofa or reading chair, featuring a lower shelf for additional storage.',
+                images: [
+                    'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80',
+                    'https://images.unsplash.com/photo-1532372320572-cda25653a26d?w=400&q=80',
+                    'https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=400&q=80'
+                ],
+                colors: [
+                    { name: 'Natural Oak', hex: '#C9A66B' },
+                    { name: 'Walnut', hex: '#5C4033' }
+                ],
+                sizes: [
+                    { name: 'Small', dims: '40cm × 40cm × 50cm' },
+                    { name: 'Large', dims: '50cm × 50cm × 55cm' }
+                ],
+                details: [
+                    'Solid oak construction',
+                    'Hand-finished with natural oil',
+                    'Lower storage shelf',
+                    'FSC certified sustainable wood'
+                ]
+            },
+            {
+                id: 4,
+                name: 'Woven Storage Basket',
+                category: 'Storage',
+                price: 65,
+                originalPrice: null,
+                tag: null,
+                description: 'Handwoven seagrass storage basket with leather handles. Perfect for organizing blankets, toys, magazines, or plants. Each basket is unique with natural color variations.',
+                images: [
+                    'https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=800&q=80',
+                    'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80',
+                    'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&q=80'
+                ],
+                colors: [
+                    { name: 'Natural', hex: '#D4C5A9' }
+                ],
+                sizes: [
+                    { name: 'Small', dims: '25cm × 25cm × 30cm' },
+                    { name: 'Medium', dims: '35cm × 35cm × 40cm' },
+                    { name: 'Large', dims: '45cm × 45cm × 50cm' }
+                ],
+                details: [
+                    'Handwoven seagrass',
+                    'Genuine leather handles',
+                    'Inner waterproof lining',
+                    'Various sizes available'
+                ]
+            },
+            {
+                id: 5,
+                name: 'Brass Table Lamp',
+                category: 'Lighting',
+                price: 175,
+                originalPrice: null,
+                tag: null,
+                description: 'Elegant brass table lamp with a sculptural silhouette. Features an adjustable arm and linen shade that casts a warm, ambient glow. A statement piece for any room.',
+                images: [
+                    'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=800&q=80',
+                    'https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=400&q=80',
+                    'https://images.unsplash.com/photo-1540932239986-30128078f3c5?w=400&q=80'
+                ],
+                colors: [
+                    { name: 'Brass', hex: '#C9A62B' },
+                    { name: 'Matte Black', hex: '#2A2A2A' }
+                ],
+                sizes: null,
+                details: [
+                    'Solid brass base and arm',
+                    'Linen drum shade',
+                    'E27 bulb socket (bulb not included)',
+                    'Inline dimmer switch'
+                ]
+            },
+            {
+                id: 6,
+                name: 'Cotton Canvas Cushion',
+                category: 'Textiles',
+                price: 78,
+                originalPrice: 95,
+                tag: 'Sale',
+                description: 'Premium cotton canvas cushion with a subtle texture. Filled with duck down for ultimate comfort. Comes with a removable linen cover with hidden zipper.',
+                images: [
+                    'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80',
+                    'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=80',
+                    'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=400&q=80'
+                ],
+                colors: [
+                    { name: 'Cream', hex: '#F5F0E8' },
+                    { name: 'Olive', hex: '#6B7355' },
+                    { name: 'Sand', hex: '#D4C5A9' }
+                ],
+                sizes: [
+                    { name: '40×40cm', dims: '40cm × 40cm' },
+                    { name: '50×50cm', dims: '50cm × 50cm' }
+                ],
+                details: [
+                    '100% cotton canvas',
+                    'Duck down filling',
+                    'Removable linen cover',
+                    'Hand wash cover'
+                ]
+            },
+            {
+                id: 7,
+                name: 'Stoneware Vase',
+                category: 'Decor',
+                price: 55,
+                originalPrice: null,
+                tag: 'New',
+                description: 'Artisan-made stoneware vase with a matte finish and organic curves. Each piece is hand-thrown and glazed by skilled craftspeople, ensuring no two are exactly alike.',
+                images: [
+                    'https://images.unsplash.com/photo-1578500494198-246f612d3b3d?w=800&q=80',
+                    'https://images.unsplash.com/photo-1581783898377-1c85bf937427?w=400&q=80',
+                    'https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae?w=400&q=80'
+                ],
+                colors: [
+                    { name: 'Chalk', hex: '#F0EDE8' },
+                    { name: 'Clay', hex: '#B89B85' },
+                    { name: 'Slate', hex: '#6B7280' }
+                ],
+                sizes: null,
+                details: [
+                    'Handmade stoneware',
+                    'Matte reactive glaze',
+                    'Waterproof interior',
+                    'Height: 28cm'
+                ]
+            },
+            {
+                id: 8,
+                name: 'Walnut Bookshelf',
+                category: 'Furniture',
+                price: 420,
+                originalPrice: null,
+                tag: null,
+                description: 'Sculptural walnut bookshelf featuring asymmetric shelving for a modern display. The cantilevered design creates visual interest while providing ample storage space.',
+                images: [
+                    'https://images.unsplash.com/photo-1594620302200-9a762244a156?w=800&q=80',
+                    'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80',
+                    'https://images.unsplash.com/photo-1593062096033-9a26b09da705?w=400&q=80'
+                ],
+                colors: [
+                    { name: 'Walnut', hex: '#5C4033' }
+                ],
+                sizes: null,
+                details: [
+                    'Solid American walnut',
+                    'Asymmetric floating design',
+                    'Wall-mounted (hardware included)',
+                    'Dimensions: 120cm × 180cm × 30cm'
+                ]
+            },
+            {
+                id: 9,
+                name: 'Stackable Desktop Storage Box',
+                category: 'Storage',
+                price: 22,
+                originalPrice: null,
+                tag: 'New',
+                description: 'Clear stackable storage organizer with pull-out drawers, perfect for organizing office supplies, stationery, and small items. Made from durable transparent plastic with a sleek minimalist design.',
+                images: [
+                    'https://cbu01.alicdn.com/img/ibank/O1CN01plUmM51hX2ZUTrO6g_!!2209934774286-0-cib.jpg'
+                ],
+                colors: [
+                    { name: 'Clear', hex: '#F0F0F0' }
+                ],
+                sizes: [
+                    { name: 'Small', dims: '15cm × 10cm × 8cm' },
+                    { name: 'Large', dims: '25cm × 15cm × 12cm' }
+                ],
+                details: [
+                    'Transparent acrylic construction',
+                    'Stackable design saves space',
+                    'Pull-out drawer for easy access',
+                    'Perfect for office & home organization'
+                ]
+            }
+        ];
+
+        // Get product ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = parseInt(urlParams.get('id')) || 1;
+
+        // Current product
+        const product = products.find(p => p.id === productId) || products[0];
+
+        // Cart State
+        let cart = JSON.parse(localStorage.getItem('haus_cart') || '[]');
+        let selectedColor = product.colors ? product.colors[0] : null;
+        let selectedSize = product.sizes ? product.sizes[0] : null;
+        let quantity = 1;
+
+        // DOM Elements
+        const mainImage = document.getElementById('mainImage');
+        const thumbnails = document.getElementById('thumbnails');
+        const productCategory = document.getElementById('productCategory');
+        const productTitle = document.getElementById('productTitle');
+        const productPrice = document.getElementById('productPrice');
+        const productBadge = document.getElementById('productBadge');
+        const productDescription = document.getElementById('productDescription');
+        const colorOptions = document.getElementById('colorOptions');
+        const colorBtns = document.getElementById('colorBtns');
+        const selectedColorEl = document.getElementById('selectedColor');
+        const sizeOptions = document.getElementById('sizeOptions');
+        const sizeBtns = document.getElementById('sizeBtns');
+        const selectedSizeEl = document.getElementById('selectedSize');
+        const qtyValue = document.getElementById('qtyValue');
+        const qtyMinus = document.getElementById('qtyMinus');
+        const qtyPlus = document.getElementById('qtyPlus');
+        const addToCartBtn = document.getElementById('addToCartBtn');
+        const wishlistBtn = document.getElementById('wishlistBtn');
+        const relatedGrid = document.getElementById('relatedGrid');
+        const cartBtn = document.getElementById('cartBtn');
+        const cartOverlay = document.getElementById('cartOverlay');
+        const cartSidebar = document.getElementById('cartSidebar');
+        const cartClose = document.getElementById('cartClose');
+        const cartItems = document.getElementById('cartItems');
+        const cartEmpty = document.getElementById('cartEmpty');
+        const cartFooter = document.getElementById('cartFooter');
+        const cartSubtotal = document.getElementById('cartSubtotal');
+        const cartCount = document.getElementById('cartCount');
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toastMessage');
+
+        // Initialize page
+        function init() {
+            // Update page title
+            document.title = `${product.name} — HAUS`;
+
+            // Set main image
+            mainImage.src = product.images[0];
+            mainImage.alt = product.name;
+
+            // Set thumbnails
+            thumbnails.innerHTML = product.images.map((img, i) => `
+                <div class="thumbnail ${i === 0 ? 'active' : ''}" onclick="changeImage('${img}')">
+                    <img src="${img}" alt="${product.name}">
+                </div>
+            `).join('');
+
+            // Set product info
+            productCategory.textContent = product.category;
+            productTitle.textContent = product.name;
+            productPrice.innerHTML = product.originalPrice 
+                ? `$${product.price} <span class="original">$${product.originalPrice}</span>`
+                : `$${product.price}`;
+            
+            if (product.tag) {
+                productBadge.textContent = product.tag;
+                productBadge.style.display = 'inline-block';
+            }
+
+            productDescription.textContent = product.description;
+
+            // Color options
+            if (product.colors && product.colors.length > 1) {
+                colorOptions.style.display = 'block';
+                selectedColorEl.textContent = selectedColor.name;
+                colorBtns.innerHTML = product.colors.map(c => `
+                    <button class="color-btn ${c.name === selectedColor.name ? 'active' : ''}" 
+                            style="background: ${c.hex}"
+                            onclick="selectColor('${c.name}')"
+                            title="${c.name}">
+                    </button>
+                `).join('');
+            }
+
+            // Size options
+            if (product.sizes && product.sizes.length > 1) {
+                sizeOptions.style.display = 'block';
+                selectedSizeEl.textContent = selectedSize.name;
+                sizeBtns.innerHTML = product.sizes.map(s => `
+                    <button class="option-btn ${s.name === selectedSize.name ? 'active' : ''}"
+                            onclick="selectSize('${s.name}')">
+                        ${s.name}
+                    </button>
+                `).join('');
+            }
+
+            // Related products
+            const related = products.filter(p => p.id !== product.id).slice(0, 4);
+            relatedGrid.innerHTML = related.map(p => `
+                <a href="product.html?id=${p.id}" class="related-card">
+                    <div class="related-image">
+                        <img src="${p.images[0]}" alt="${p.name}">
+                    </div>
+                    <h3 class="related-name">${p.name}</h3>
+                    <p class="related-price">$${p.price}</p>
+                </a>
+            `).join('');
+
+            // Accordion
+            document.querySelectorAll('.accordion-header').forEach(header => {
+                header.addEventListener('click', () => {
+                    header.parentElement.classList.toggle('open');
+                });
+            });
+
+            // Quantity controls
+            qtyMinus.addEventListener('click', () => {
+                if (quantity > 1) {
+                    quantity--;
+                    qtyValue.textContent = quantity;
+                }
+            });
+
+            qtyPlus.addEventListener('click', () => {
+                quantity++;
+                qtyValue.textContent = quantity;
+            });
+
+            // Add to cart
+            addToCartBtn.addEventListener('click', () => {
+                addToCart();
+            });
+
+            // Wishlist
+            wishlistBtn.addEventListener('click', () => {
+                wishlistBtn.classList.toggle('active');
+                showToast(wishlistBtn.classList.contains('active') ? 'Added to wishlist' : 'Removed from wishlist');
+            });
+
+            // Cart
+            cartBtn.addEventListener('click', openCart);
+            cartClose.addEventListener('click', closeCart);
+            cartOverlay.addEventListener('click', closeCart);
+
+            // Initial cart update
+            updateCart();
+        }
+
+        function changeImage(src) {
+            mainImage.src = src;
+            document.querySelectorAll('.thumbnail').forEach(t => {
+                t.classList.toggle('active', t.querySelector('img').src === src);
+            });
+        }
+
+        function selectColor(name) {
+            selectedColor = product.colors.find(c => c.name === name);
+            selectedColorEl.textContent = selectedColor.name;
+            document.querySelectorAll('.color-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.title === name);
+            });
+        }
+
+        function selectSize(name) {
+            selectedSize = product.sizes.find(s => s.name === name);
+            selectedSizeEl.textContent = selectedSize.name;
+            document.querySelectorAll('.size-btn, .option-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent.trim() === name);
+            });
+        }
+
+        function addToCart() {
+            const item = {
+                id: product.id,
+                name: product.name,
+                price: product.price,
+                image: product.images[0],
+                color: selectedColor ? selectedColor.name : null,
+                size: selectedSize ? selectedSize.name : null,
+                qty: quantity
+            };
+
+            // Check if same item exists
+            const existing = cart.find(i => 
+                i.id === item.id && 
+                i.color === item.color && 
+                i.size === item.size
+            );
+
+            if (existing) {
+                existing.qty += quantity;
+            } else {
+                cart.push(item);
+            }
+
+            saveCart();
+            updateCart();
+            showToast(`${product.name} added to cart!`);
+            openCart();
+        }
+
+        function saveCart() {
+            localStorage.setItem('haus_cart', JSON.stringify(cart));
+        }
+
+        function updateCart() {
+            const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+            cartCount.textContent = totalCount;
+            cartCount.classList.toggle('show', totalCount > 0);
+
+            if (cart.length === 0) {
+                cartEmpty.style.display = 'block';
+                cartFooter.style.display = 'none';
+                const items = cartItems.querySelectorAll('.cart-item');
+                items.forEach(i => i.remove());
+            } else {
+                cartEmpty.style.display = 'none';
+                cartFooter.style.display = 'block';
+                cartSubtotal.textContent = `$${subtotal}`;
+
+                const items = cartItems.querySelectorAll('.cart-item');
+                items.forEach(i => i.remove());
+
+                cart.forEach(item => {
+                    const el = document.createElement('div');
+                    el.className = 'cart-item';
+                    el.innerHTML = `
+                        <div class="cart-item-image">
+                            <img src="${item.image}" alt="${item.name}">
+                        </div>
+                        <div class="cart-item-info">
+                            <h4 class="cart-item-name">${item.name}</h4>
+                            <p class="cart-item-price">$${item.price}</p>
+                            <div class="cart-item-qty">
+                                <button class="qty-btn-small" onclick="updateQty(${item.id}, '${item.color}', '${item.size}', -1)">−</button>
+                                <span>${item.qty}</span>
+                                <button class="qty-btn-small" onclick="updateQty(${item.id}, '${item.color}', '${item.size}', 1)">+</button>
+                            </div>
+                        </div>
+                        <button class="cart-item-remove" onclick="removeFromCart(${item.id}, '${item.color}', '${item.size}')">Remove</button>
+                    `;
+                    cartItems.appendChild(el);
+                });
+            }
+        }
+
+        function updateQty(id, color, size, delta) {
+            const item = cart.find(i => i.id === id && i.color === color && i.size === size);
+            if (item) {
+                item.qty += delta;
+                if (item.qty <= 0) {
+                    removeFromCart(id, color, size);
+                } else {
+                    saveCart();
+                    updateCart();
+                }
+            }
+        }
+
+        function removeFromCart(id, color, size) {
+            cart = cart.filter(i => !(i.id === id && i.color === color && i.size === size));
+            saveCart();
+            updateCart();
+        }
+
+        function openCart() {
+            cartOverlay.classList.add('open');
+            cartSidebar.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCart() {
+            cartOverlay.classList.remove('open');
+            cartSidebar.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        function showToast(message) {
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+        }
+
+        // Make functions available globally
+        window.changeImage = changeImage;
+        window.selectColor = selectColor;
+        window.selectSize = selectSize;
+        window.updateQty = updateQty;
+        window.removeFromCart = removeFromCart;
+
+        // Start
+        init();
+    </script>
+</body>
+</html>
